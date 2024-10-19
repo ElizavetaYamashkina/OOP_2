@@ -1,0 +1,70 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+public class Main
+{
+
+//1!
+    private static boolean FourNotSix(int number)
+    {
+        return (number % 4 == 0 && number % 6 != 0);
+    }
+
+    private static int getSum(int number)
+    {
+        int sum = 0;
+        while (number > 0)
+        {
+            sum += number % 10;
+            number /= 10;
+        }
+
+        return sum;
+    }
+    //2
+    public static String TwoMiddle(String s)
+    {
+
+        if (s == null || s.length() % 2 != 0)
+        {
+            return " Hе четное!";
+        }
+        int length = s.length();
+        return s.substring(length / 2 - 1, length / 2 + 1); //подстрока
+    }
+     public static void main(String[] args)
+     {
+            //1!
+            System.out.println("№1");
+            //OnePoint onePoint = new OnePoint();
+            List<Integer> numbers = new ArrayList<>();
+            for (int i = 0; i <= 300; i++)
+            {
+                if (FourNotSix(i)) {
+                    int sum = getSum(i);
+                    if (sum < 10) {
+                        System.out.print(i + " ");
+                        numbers.add(i);
+                    }
+                }
+            }
+            System.out.println();
+
+            //2!
+
+            System.out.println("№2");
+            String word1 = "Привет";
+            System.out.println(word1 + " " + TwoMiddle(word1));
+
+            String word2 = "abcde";
+            System.out.println(word2 + " " + TwoMiddle(word2));
+
+            String word3 = "cucumber";
+            System.out.println(word3 + " " + TwoMiddle(word3));
+
+
+
+        }
+
+     }
+}
