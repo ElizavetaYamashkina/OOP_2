@@ -1,1 +1,129 @@
-I have football
+import java.util.*;
+import java.util.regex.Pattern;
+public class Main
+{
+
+    //1!
+    private static boolean FourNotSix(int number)
+    {
+        return (number % 4 == 0 && number % 6 != 0);
+    }
+
+    private static int getSum(int number)
+    {
+        int sum = 0;
+        while (number > 0)
+        {
+            sum += number % 10;
+            number /= 10;
+        }
+
+        return sum;
+    }
+    //2
+    public static String Middle(String word)
+    {
+
+        if (word == null || word.length() % 2 != 0)
+        {
+            return " Hе четное!";
+        }
+        int length = word.length();
+        return word.substring(length / 2 - 1, length / 2 + 1); //подстрока
+
+    }
+
+    //3
+    private static String MinWord(String[] words)
+    {
+        int minCount = Integer.MAX_VALUE;
+        String result = "";
+
+        for (int i = 0; i < words.length; i++)
+        {
+            String word = words[i];
+            Set<Character> Chars = new HashSet<>();//множество
+
+            for (int j = 0; j < word.length(); j++)
+            {
+                char c = word.charAt(j);//символ строки по индексу
+                Chars.add(c);
+            }
+
+            if (Chars.size() < minCount)
+            {
+                minCount = Chars.size();
+                result = word;
+            }
+        }
+        return result;
+    }
+    //4
+    private static int countLatinWords(String line)
+    {
+        String[] words = line.split(" ");
+        Pattern pattern = Pattern.compile("[a-zA-Z]+");
+
+        int count = 0;
+        for (int i = 0; i < words.length; i++)
+        {
+            String word = words[i];
+
+            if (pattern.matcher(word).matches())
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static void main(String[] args)
+    {
+        //1!
+        System.out.println("№1");
+        System.out.println("Числа от 0 до 300, которые делятся на 4, но не делятся на 6 и сумма цифр которых < 10: ");
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i <= 300; i++)
+        {
+            if (FourNotSix(i)) {
+                int sum = getSum(i);
+                if (sum < 10) {
+                    System.out.print(i + " ");
+                    numbers.add(i);
+                }
+            }
+        }
+        System.out.println();
+
+        //2!
+
+        System.out.println("№2");
+        System.out.println("Два средних знака строки: ");
+        String word1 = "Привет";
+        System.out.println(word1 + ": " + Middle(word1));
+
+        String word2 = "abcde";
+        System.out.println(word2 + ": " + Middle(word2));
+
+        String word3 = "cucumber";
+        System.out.println(word3 + ": " + Middle(word3));
+
+        //3!
+        System.out.println("№3");
+        String input = "gjk fffff ff ab f 1234 jkjk";
+        System.out.println("Исходная строка: " + input);
+        String[] words = input.split(" ");
+        String minWord = MinWord(words);
+        System.out.println("Слово с минимальным числом уникальных символов: " + minWord);
+
+        //4!
+        System.out.println("№4");
+        String line = "One two three раз два три one1 two2 123 ";
+        System.out.println("Исходная строка: " + line);
+        int count = countLatinWords(line);
+        System.out.println("Количество слов, содержащих только символы латинского алфавита: " + count);
+
+
+    }
+
+}
